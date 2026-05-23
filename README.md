@@ -204,13 +204,27 @@ cd colony-management-system
 2. **Install backend dependencies**
 ```bash
 cd NodeJS
-npm install
+npm init -y
+npm install express
+npm i dotenv
+npm i cors
+npm i cookie-parser
+npm i mongoose
+npm i nodemailer
+npm i nodemon -D
+npm i jsonwebtoken
 ```
  
 3. **Install frontend dependencies**
 ```bash
 cd ../React
+npm init vite
 npm install
+npm i react-router-hook
+npm i react-router-dom
+npm i axios
+npm i antd
+npm i toastify
 ```
  
 4. **Set up environment variables** (see below)
