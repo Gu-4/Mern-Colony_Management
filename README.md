@@ -295,16 +295,6 @@ npm run dev
  
 ---
  
-## 📸 Screenshots
- 
-> Add your screenshots here
- 
-| Admin Dashboard | Resident Dashboard | Guard Dashboard |
-|:-:|:-:|:-:|
-| ![Admin](#) | ![Resident](#) | ![Guard](#) |
- 
----
- 
 ## 🤝 Contributing
  
 Contributions are welcome! Please follow these steps:
