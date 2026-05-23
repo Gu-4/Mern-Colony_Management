@@ -91,3 +91,224 @@ Colony Management System (CMS) is a role-based web application that serves **fou
 | Razorpay | Payment gateway |
  
 ---
+
+## 📁 Project Structure
+ 
+```
+colony-management-system/
+│
+├── React/                         # React frontend
+│   ├── public/
+│   │   └── assets/images/
+│   └── src/
+│       ├── layout/
+│       │   ├── AdminLayout.jsx
+│       │   ├── GuardLayout.jsx
+│       │   ├── PublicLayout.jsx
+│       │   ├── UserLayout.jsx
+│       ├── pages/
+│       │   ├── admin/              # Admin interface
+│       │   │   ├── AdminLogin.jsx
+│       │   │   ├── Dashboard.jsx
+│       │   │   ├── ManageBuilding.jsx
+│       │   │   ├── ManageFlats.jsx
+│       │   │   ├── ManageResidents.jsx
+│       │   │   ├── ManageHelper.jsx
+│       │   │   ├── ManageComplaints.jsx
+│       │   │   ├── SecurityGuard.jsx
+│       │   │   └── ChangePassword.jsx
+│       │   ├── users/              # Resident interface
+│       │   │   ├── UserLogin.jsx
+│       │   │   ├── UserDashboard.jsx
+│       │   │   ├── UserProfile.jsx
+│       │   │   ├── MyFlat.jsx
+│       │   │   ├── AddVisitors.jsx
+│       │   │   ├── AddVehicle.jsx
+│       │   │   ├── Complaints.jsx
+│       │   │   ├── Payment.jsx
+│       │   │   └── UChangePassword.jsx
+│       │   ├── security/           # Guard interface
+│       │   │   ├── GuardLogin.jsx
+│       │   │   ├── GuardDashboard.jsx
+│       │   │   ├── GuardProfile.jsx
+│       │   │   ├── ManageVisitors.jsx
+│       │   │   ├── Vehicles.jsx
+│       │   │   └── GChangePassword.jsx
+│       │   └── public/             # Public pages
+│       │       ├── Home.jsx
+│       │       ├── About.jsx
+│       │       ├── Gallery.jsx
+│       │       ├── Contact.jsx
+│       |       ├── LoginPage.jsx
+│       |       └── PageNotFound.jsx
+│       └── components/
+│           ├── AssignFlats.jsx
+│           ├── Footer.jsx
+│           ├── FooterAdmin.jsx
+│           ├── FooterGuard.jsx
+│           ├── FooterUser.jsx
+│           ├── Navbar.jsx
+│           ├── NavbarAdmin.jsx
+│           ├── NavbarGuard.jsx
+│           ├── NavbarUser.jsx
+│           └── EditFlats.jsx
+│
+└── NodeJS/
+    ├── config/
+    │   ├── connection.js
+    │   ├── mongoose.js                    # Node.js backend
+    ├── models/                     # Mongoose schemas
+    │   ├── Admin.js
+    │   ├── Block.js
+    │   ├── Building.js
+    │   ├── Complaint.js
+    │   ├── Flat.js
+    │   ├── Helper.js
+    │   ├── Resident.js
+    │   ├── Security.js
+    │   ├── Vehicle.js
+    │   ├── Visitor.js
+    ├── controllers/
+    │   ├── adminController.js                # /admin/* routes api
+    │   ├── userController.js                 # /user/* routes api
+    │   └── guardController.js                # /guard/* routes api
+    ├── routes/
+    │   ├── admin.js                # /admin/* routes
+    │   ├── user.js                 # /user/* routes
+    │   └── guard.js                # /guard/* routes
+    ├── middleware/
+    │   ├── adminAuth.js
+    │   ├── guardAuth.js   
+    │   └── userAuth.js                 # JWT cookie middleware
+    └── .env 
+    └── app.js                    # Express app entry point
+```
+ 
+---
+
+ ## 🏁 Getting Started
+ 
+### Prerequisites
+ 
+- Node.js v18+
+- MongoDB v6+ (local or [MongoDB Compass](https://www.mongodb.com/atlas))
+- npm v9+
+### Installation
+ 
+1. **Clone the repository**
+```bash
+git clone https://github.com/your-username/colony-management-system.git
+cd colony-management-system
+```
+ 
+2. **Install backend dependencies**
+```bash
+cd NodeJS
+npm install
+```
+ 
+3. **Install frontend dependencies**
+```bash
+cd ../React
+npm install
+```
+ 
+4. **Set up environment variables** (see below)
+5. **Run the backend server**
+```bash
+cd NodeJs
+npm run dev
+# Server runs on http://localhost:3000
+```
+ 
+6. **Run the frontend**
+```bash
+cd React
+npm run dev
+# App runs on http://localhost:5173
+``` 
+---
+ 
+## 🔌 API Routes
+ 
+### Public
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/admin/login` | Admin login |
+| `POST` | `/user/login` | Resident login |
+| `POST` | `/guard/login` | Guard login |
+ 
+### Admin Routes (`/admin/*`) — JWT protected
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET/POST` | `/admin/building` | Get / add buildings |
+| `DELETE` | `/admin/building/:id` | Delete building |
+| `GET/POST` | `/admin/flats` | Get / add flats |
+| `DELETE` | `/admin/flats/:id` | Delete flat |
+| `GET/POST` | `/admin/helper` | Get / add helpers |
+| `DELETE` | `/admin/helper/:id` | Delete helper |
+| `GET/POST` | `/admin/guards` | Get / add guards |
+| `PUT/DELETE` | `/admin/guards/:id` | Toggle status / delete guard |
+| `GET` | `/admin/complaint` | Get all complaints |
+| `PUT` | `/admin/assign-helper` | Assign helper to complaint |
+| `PUT` | `/admin/close-complaint/:id` | Close complaint |
+| `PUT` | `/admin/change-password` | Change admin password |
+ 
+### User Routes (`/user/*`) — JWT protected
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/user/dashboard` | Resident dashboard stats |
+| `GET/PUT` | `/user/profile/:id` | Get / update profile |
+| `GET` | `/user/my-flat` | Get flat details |
+| `GET/POST/DELETE` | `/user/visitor` | Manage visitors |
+| `GET/POST/DELETE` | `/user/vehicle` | Manage vehicles |
+| `GET/POST` | `/user/complaint` | Get / submit complaints |
+| `GET` | `/user/payments` | Payment history |
+| `PUT` | `/user/pay_status` | Update payment after Razorpay |
+| `GET` | `/user/rent/:flat_id` | Get rent + deposit |
+| `PUT` | `/user/change-password` | Change password |
+ 
+### Guard Routes (`/guard/*`) — JWT protected
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/guard/stats` | Visitor + vehicle counts |
+| `GET` | `/guard/today-visitor` | Today's visitors |
+| `GET` | `/guard/visitor` | All visitor history |
+| `PUT` | `/guard/visitor/:id` | Mark visitor as arrived |
+| `GET` | `/guard/vehicle` | All vehicles |
+| `PUT` | `/guard/assign-parking` | Assign parking slot |
+| `PUT` | `/guard/change-password` | Change password |
+ 
+---
+ 
+## 📸 Screenshots
+ 
+> Add your screenshots here
+ 
+| Admin Dashboard | Resident Dashboard | Guard Dashboard |
+|:-:|:-:|:-:|
+| ![Admin](#) | ![Resident](#) | ![Guard](#) |
+ 
+---
+ 
+## 🤝 Contributing
+ 
+Contributions are welcome! Please follow these steps:
+ 
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add your feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+---
+ 
+## 📄 License
+ 
+This project is licensed under the [MIT License](LICENSE).
+ 
+---
+ 
+## 👨‍💻 Author
+ 
+**Gursimrat Kaur**
+- GitHub: [Gursimrat Kaur](https://github.com/Gu-4/Mern-Colony_Management)
